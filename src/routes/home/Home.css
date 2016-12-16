@@ -18,15 +18,28 @@
   margin: 0 auto;
   padding: 0 0 40px;
   max-width: var(--max-content-width);
+  display:block;
+  white-space:nowrap;
+  overflow:auto;
 }
 
 .news {
-  padding: 0;
+   margin: 0px;
+   padding: 0px;
+   list-style: none;
+   display: flex;
+   flex-direction: row;
+   flex-wrap: wrap;
 }
 
 .newsItem {
   list-style-type: none;
-  padding-bottom: 6px;
+  padding: 10px;
+  display:inline-block;
+  width: 140px; /*每个元素的初始化宽度*/
+  text-align: center;
+  margin-top: 10px;
+  margin-bottom: 10px;
 }
 
 .newsTitle {
@@ -36,4 +49,9 @@
 .newsTitle,
 .newsDesc {
   display: block;
+}
+
+.newsImage{
+  width:100px;
+  height:146px;
 }
