@@ -24,15 +24,17 @@ export default {
         'Content-Type': 'application/json',
       },
       body: JSON.stringify({
-        query: '{movies{title,alt,original_title,year,images{medium}}}',
+        query: '{movies{title,alt,original_title,year,images{large},rating{average},directors{name,alt}}comingsoonmovies{title,alt,original_title,year,images{large},rating{average},directors{name,alt}}}',
       }),
       credentials: 'include',
     });
     const { data } = await resp.json();
-    if (!data || !data.movies) throw new Error('Failed to load the news feed.');
+    if (!data || !data.movies || !data.comingsoonmovies) throw new Error('Failed to load the movies data.');
+
     return {
-      title: 'React Starter Kit',
-      component: <Layout><Home movies={data.movies} /></Layout>,
+      title: '电影',
+      component: <Layout><Home movies={data.movies} comingsoonmovies={data.comingsoonmovies} />
+      </Layout>,
     };
   },
 

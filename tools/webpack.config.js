@@ -276,6 +276,7 @@ const clientConfig = extend(true, {}, config, {
         },
       }),
     ],
+
   ],
 
   // Choose a developer tool to enhance debugging
@@ -336,6 +337,7 @@ const serverConfig = extend(true, {}, config, {
     // https://webpack.github.io/docs/list-of-plugins.html#bannerplugin
     new webpack.BannerPlugin('require("source-map-support").install();',
       { raw: true, entryOnly: false }),
+
   ],
 
   node: {

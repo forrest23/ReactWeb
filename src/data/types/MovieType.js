@@ -11,6 +11,7 @@ import {
   GraphQLObjectType as ObjectType,
   GraphQLString as StringType,
   GraphQLNonNull as NonNull,
+  GraphQLList as List,
 } from 'graphql';
 
 const MovieImageType = new ObjectType({
@@ -22,6 +23,27 @@ const MovieImageType = new ObjectType({
   },
 });
 
+const MovieRatingType = new ObjectType({
+  name: 'MovieRating',
+  fields: {
+    max: { type: new NonNull(StringType) },
+    average: { type: new NonNull(StringType) },
+    stars: { type: new NonNull(StringType) },
+    min: { type: new NonNull(StringType) },
+  },
+});
+
+const MovieDirectorType = new ObjectType({
+  name: 'MovieDirector',
+  fields: {
+    name: { type: new NonNull(StringType) },
+    alt: { type: StringType },
+    avatars: { type: MovieImageType },
+  },
+});
+
+
+
 const MovieType = new ObjectType({
   name: 'Movie',
   fields: {
@@ -30,6 +52,8 @@ const MovieType = new ObjectType({
     original_title: { type: new NonNull(StringType) },
     year: { type: StringType },
     images: { type: MovieImageType },
+    rating: { type: MovieRatingType },
+    directors: { type: new List(MovieDirectorType) },
   },
 });
 

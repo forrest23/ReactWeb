@@ -8,12 +8,22 @@
  */
 
 import React, { PropTypes } from 'react';
+import { Card, Col, Row, Button, Tabs, Icon } from 'antd';
 import withStyles from 'isomorphic-style-loader/lib/withStyles';
 import s from './Home.css';
+
+const TabPane = Tabs.TabPane;
 
 class Home extends React.Component {
   static propTypes = {
     movies: PropTypes.arrayOf(PropTypes.shape({
+      title: PropTypes.string.isRequired,
+      alt: PropTypes.string.isRequired,
+      original_title: PropTypes.string,
+      year: PropTypes.string,
+    })).isRequired,
+
+    comingsoonmovies: PropTypes.arrayOf(PropTypes.shape({
       title: PropTypes.string.isRequired,
       alt: PropTypes.string.isRequired,
       original_title: PropTypes.string,
@@ -25,19 +35,52 @@ class Home extends React.Component {
     return (
       <div className={s.root}>
         <div className={s.container}>
-          <h1 className={s.title}>正在热映的电影</h1>
-          <ul className={s.news}>
-            {this.props.movies.map((item, index) => (
-              <li key={index} className={s.newsItem}>
-                <a href={item.alt} className={s.newsTitle}>{item.title}</a>
-                <span
-                  className={s.newsDesc}
-                  dangerouslySetInnerHTML={{ __html: item.year }}
-                />
-                <img src={item.images.medium} alt="" className={s.newsImage} />
-              </li>
-            ))}
-          </ul>
+          <Tabs defaultActiveKey="1">
+            <TabPane tab={<span><Icon type="apple" />正在热映</span>} key="1">
+              <div>
+                <Row className={s.row}>
+                  {this.props.movies.map((item, index) => (
+                    <Col span="6" key={index} className={s.col}>
+                      <Card className={s.card} bodyStyle={{ padding: 0 }}>
+                        <a href={item.alt}>
+                          <img alt="" className={s.img} src={item.images.large} />
+                        </a>
+                        <div className={s.cardText}>
+                          <a href={item.alt}><h2>{item.title}</h2></a>
+                          <p>导演：<a href={item.directors[0].alt} className={s.rating}>
+                            {item.directors[0].name}</a></p>
+                          <p>豆瓣评分：<span className={s.rating}>{item.rating.average}</span></p>
+                          <p className={s.button}><Button type="primary">选座购票</Button></p>
+                        </div>
+                      </Card>
+                    </Col>
+                  ))}
+                </Row>
+              </div>
+            </TabPane>
+            <TabPane tab={<span className={s.spanText}><Icon type="android" />即将上映</span>} key="2">
+              <div>
+                <Row className={s.row}>
+                  {this.props.comingsoonmovies.map((item, index) => (
+                    <Col span="6" key={index} className={s.col}>
+                      <Card className={s.card} bodyStyle={{ padding: 0 }}>
+                        <a href={item.alt}>
+                          <img alt="" className={s.img} src={item.images.large} />
+                        </a>
+                        <div className={s.cardText}>
+                          <a href={item.alt}><h2>{item.title}</h2></a>
+                          <p>导演：<a href={item.directors[0].alt} className={s.rating}>
+                            {item.directors[0].name}</a></p>
+                          <p>豆瓣评分：<span className={s.rating}>{item.rating.average}</span></p>
+                          <p className={s.button}><Button type="primary">选座购票</Button></p>
+                        </div>
+                      </Card>
+                    </Col>
+                  ))}
+                </Row>
+              </div>
+            </TabPane>
+          </Tabs>
         </div>
       </div>
     );
