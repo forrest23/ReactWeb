@@ -22,7 +22,7 @@ class Navigation extends React.Component {
     return (
       <div className={cx(s.root, this.props.className)} role="navigation">
         <Link className={s.link} to="/">电影</Link>
-        <Link className={s.link} to="/contact">电视</Link>
+        <Link className={s.link} to="/todo">电视</Link>
         <span className={s.spacer}> | </span>
         <Link className={s.link} to="/login">登陆</Link>
         <span className={s.spacer}>or</span>

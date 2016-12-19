@@ -8,14 +8,14 @@
  */
 
 import React from 'react';
-import Home from './Home';
+import Todo from './Todo';
 import fetch from '../../core/fetch';
 import Layout from '../../components/Layout';
 
 
 export default {
 
-  path: '/',
+  path: '/todo',
 
   async action() {
     const resp = await fetch('/graphql', {
@@ -25,16 +25,16 @@ export default {
         'Content-Type': 'application/json',
       },
       body: JSON.stringify({
-        query: '{movies{title,alt,original_title,year,images{large},rating{average},directors{name,alt}}comingsoonmovies{title,alt,original_title,year,images{large},rating{average},directors{name,alt}}}',
+        query: '{todos{id,content}}',
       }),
       credentials: 'include',
     });
     const { data } = await resp.json();
-    if (!data || !data.movies || !data.comingsoonmovies) throw new Error('Failed to load the movies data.');
+    if (!data || !data.todos) throw new Error('Failed to load the movies data.');
 
     return {
-      title: '电影',
-      component: <Layout><Home movies={data.movies} comingsoonmovies={data.comingsoonmovies} />
+      title: '代办',
+      component: <Layout><Todo todoss={data.todos} />
       </Layout>,
     };
   },

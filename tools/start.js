@@ -17,6 +17,8 @@ import webpackConfig from './webpack.config';
 import clean from './clean';
 import copy from './copy';
 
+
+
 process.argv.push('--watch');
 const [config] = webpackConfig;
 

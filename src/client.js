@@ -19,6 +19,8 @@ import App from './components/App';
 import configureStore from './store/configureStore';
 import { ErrorReporter, deepForceUpdate } from './core/devUtils';
 
+
+
 // Global (context) variables that can be easily accessed from any React component
 // https://facebook.github.io/react/docs/context.html
 const context = {

@@ -17,6 +17,7 @@ import content from './queries/content';
 import news from './queries/news';
 import movies from './queries/movies';
 import comingsoonmovies from './queries/comingsoonmovies';
+import todos from './queries/todos';
 
 const schema = new Schema({
   query: new ObjectType({
@@ -27,6 +28,7 @@ const schema = new Schema({
       news,
       movies,
       comingsoonmovies,
+      todos,
     },
   }),
 });

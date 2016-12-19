@@ -10,10 +10,11 @@
 /* eslint-disable global-require */
 
 // The top-level (parent) route
+
+
+
 export default {
-
   path: '/',
-
   // Keep in mind, routes are evaluated in order
   children: [
     require('./home').default,
@@ -21,6 +22,7 @@ export default {
     require('./login').default,
     require('./register').default,
     require('./admin').default,
+    require('./todo').default,
 
     // Wildcard routes, e.g. { path: '*', ... } (must go last)
     require('./content').default,

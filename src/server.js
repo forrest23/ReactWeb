@@ -6,7 +6,6 @@
  * This source code is licensed under the MIT license found in the
  * LICENSE.txt file in the root directory of this source tree.
  */
-
 import 'babel-polyfill';
 import path from 'path';
 import express from 'express';
@@ -32,7 +31,10 @@ import configureStore from './store/configureStore';
 import { setRuntimeVariable } from './actions/runtime';
 import { port, auth } from './config';
 
+import { createTodo } from './core/todoapi';
+
 const app = express();
+
 
 //
 // Tell any CSS tooling (such as Material UI) to use all vendor prefixes if the
@@ -62,6 +64,13 @@ app.use(passport.initialize());
 if (process.env.NODE_ENV !== 'production') {
   app.enable('trust proxy');
 }
+
+
+app.get('/todo/create', (req, res) => {
+  createTodo();
+  res.redirect('/todo');
+});
+
 app.get('/login/facebook',
   passport.authenticate('facebook', { scope: ['email', 'user_location'], session: false }),
 );
